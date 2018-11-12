@@ -1,0 +1,7 @@
+com\inter\server\interserver\domain\response\ClientResponse.class
+com\inter\server\interserver\service\interfaces\ClientServiceI.class
+com\inter\server\interserver\domain\Client.class
+com\inter\server\interserver\InterServerApplication.class
+com\inter\server\interserver\service\implement\ClientService.class
+com\inter\server\interserver\controller\ClientController.class
+com\inter\server\interserver\repository\ClientRepository.class

@@ -23,7 +23,8 @@ public class ClientController {
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity create(@Valid @RequestBody Client clientRequest) {
-        ClientResponse clientResponse = new ClientResponse();
+        ClientResponse clientResponse = clientService.create(clientRequest);
+
         return new ResponseEntity<>(clientResponse, HttpStatus.CREATED);
     }
 }
