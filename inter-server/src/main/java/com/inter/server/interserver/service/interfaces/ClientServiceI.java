@@ -1,19 +1,20 @@
 package com.inter.server.interserver.service.interfaces;
 
 import com.inter.server.interserver.domain.Client;
+import com.inter.server.interserver.domain.request.ClientRequest;
 import com.inter.server.interserver.domain.response.ClientResponse;
 
 import java.util.List;
 
 public interface ClientServiceI {
 
-    ClientResponse create(Client client);
+    ClientResponse create(ClientRequest client);
 
     List<Client> findAll();
 
-    Client findById(Long id);
+    ClientResponse findById(Long id);
 
-    ClientResponse update(Client client);
+    ClientResponse update(ClientRequest client);
 
-    String delete(Client client);
+    void delete(ClientRequest client);
 }

@@ -24,6 +24,13 @@ public class Client {
     public Client() {
     }
 
+    public Client(String name, String cpf, String email, String password) {
+        this.name = name;
+        this.cpf = cpf;
+        this.email = email;
+        this.password = password;
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,8 +1,10 @@
 package com.inter.server.interserver.service.implement;
 
 import com.inter.server.interserver.domain.Client;
+import com.inter.server.interserver.domain.request.ClientRequest;
 import com.inter.server.interserver.domain.response.ClientResponse;
 import com.inter.server.interserver.exception.BusinessRuleException;
+import com.inter.server.interserver.exception.NonExistentException;
 import com.inter.server.interserver.repository.ClientRepository;
 import com.inter.server.interserver.service.interfaces.ClientServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,8 @@ public class ClientService implements ClientServiceI {
     private ClientRepository clientRepository;
 
     @Override
-    public ClientResponse create(Client client) {
+    public ClientResponse create(ClientRequest clientRequest) {
+        Client client = buildClient(clientRequest);
         clientExist(client);
         Client clientSave = clientRepository.save(client);
         clientSaved(clientSave);
@@ -30,18 +33,32 @@ public class ClientService implements ClientServiceI {
     }
 
     @Override
-    public Client findById(Long id) {
-        return null;
+    public ClientResponse findById(Long id) {
+        Optional<Client> clientOptional = clientRepository.findById(id);
+        if(clientOptional.isEmpty()){
+            throw new NonExistentException("CLIENT NOT EXISTS","Client Not Exists in Database");
+        }
+        Client client = clientOptional.get();
+        return new ClientResponse(client.getId(), client.getName());
     }
 
     @Override
-    public ClientResponse update(Client client) {
-        return null;
+    public ClientResponse update(ClientRequest clientRequest) {
+        Client client = clientRepository.findByCpf(clientRequest.getCpf());
+        clientNotExist(client);
+        Client clientUpdate = buildClient(clientRequest);
+        clientUpdate.setId(client.getId());
+        clientUpdate = clientRepository.save(clientUpdate);
+        return new ClientResponse(clientUpdate.getId(), clientUpdate.getName());
     }
 
     @Override
-    public String delete(Client client) {
-        return null;
+    public void delete(ClientRequest clientRequest) {
+        Client client = clientRepository.findByCpf(clientRequest.getCpf());
+        clientNotExist(client);
+        Client clientDelete = buildClient(clientRequest);
+        clientDelete.setId(client.getId());
+        clientRepository.save(clientDelete);
     }
 
     private void clientSaved(Client clientSave) {
@@ -55,5 +72,20 @@ public class ClientService implements ClientServiceI {
         if(clientE!=null) {
             throw new BusinessRuleException("INVALID_REGISTER", "Client Already Has Registration");
         }
+    }
+
+    private void clientNotExist(Client client) {
+        if(client==null){
+            throw new NonExistentException("CLIENT NOT EXISTS","Client Not Exists in Database");
+        }
+    }
+
+    private Client buildClient(ClientRequest clientRequest) {
+        return new Client(
+                clientRequest.getName(),
+                clientRequest.getCpf(),
+                clientRequest.getEmail(),
+                clientRequest.getPassword()
+        );
     }
 }
