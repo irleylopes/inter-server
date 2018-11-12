@@ -11,6 +11,7 @@ public class InterServerApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		int a = 0;
 	}
 
 }

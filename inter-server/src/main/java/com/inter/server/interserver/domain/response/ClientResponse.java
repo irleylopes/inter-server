@@ -6,6 +6,11 @@ public class ClientResponse {
 
     private String name;
 
+    public ClientResponse(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public ClientResponse() {
     }
 
