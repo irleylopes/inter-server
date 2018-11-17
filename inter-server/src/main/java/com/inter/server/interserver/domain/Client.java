@@ -1,34 +1,40 @@
 package com.inter.server.interserver.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    @NotBlank(message = "clients-1")
+    private String username;
 
+    @NotNull(message = "clients-2")
     private String cpf;
 
-    private String email;
-
+    @NotNull(message = "clients-3")
     private String password;
+
+    @NotNull(message = "clients-3")
+    private byte enabled;
+
+//    @OneToMany(mappedBy = "client")
+////    private List<Script> scripts;
 
     public Client() {
     }
 
-    public Client(String name, String cpf, String email, String password) {
-        this.name = name;
+    public Client(String username, String cpf, String password, byte enabled) {
+        this.username = username;
         this.cpf = cpf;
-        this.email = email;
         this.password = password;
+        this.enabled = enabled;
     }
 
     public Long getId() {
@@ -39,12 +45,12 @@ public class Client {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getCpf() {
@@ -55,14 +61,6 @@ public class Client {
         this.cpf = cpf;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -71,31 +69,22 @@ public class Client {
         this.password = password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Client client = (Client) o;
-        return Objects.equals(id, client.id) &&
-                Objects.equals(name, client.name) &&
-                Objects.equals(cpf, client.cpf) &&
-                Objects.equals(email, client.email) &&
-                Objects.equals(password, client.password);
+    public byte getEnabled() {
+        return enabled;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, cpf, email, password);
+    public void setEnabled(byte enabled) {
+        this.enabled = enabled;
     }
 
     @Override
     public String toString() {
         return "Client{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
                 ", cpf='" + cpf + '\'' +
-                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
 }
