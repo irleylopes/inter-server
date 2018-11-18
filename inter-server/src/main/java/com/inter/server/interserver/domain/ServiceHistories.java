@@ -1,12 +1,8 @@
 package com.inter.server.interserver.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 public class ServiceHistories {
@@ -15,16 +11,22 @@ public class ServiceHistories {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "clients-1")
-    private Integer service_id;
-
     @NotNull(message = "clients-2")
     private String executionTime;
 
     @NotNull(message = "clients-3")
-    private Timestamp cocreated_atde;
+    private LocalDate createdat;
+
+    @ManyToOne
+    private Service service;
 
     public ServiceHistories() {
+    }
+
+    public ServiceHistories(String executionTime, LocalDate createdat, Service service) {
+        this.executionTime = executionTime;
+        this.createdat = createdat;
+        this.service = service;
     }
 
     public Long getId() {
@@ -35,14 +37,6 @@ public class ServiceHistories {
         this.id = id;
     }
 
-    public Integer getService_id() {
-        return service_id;
-    }
-
-    public void setService_id(Integer service_id) {
-        this.service_id = service_id;
-    }
-
     public String getExecutionTime() {
         return executionTime;
     }
@@ -51,21 +45,29 @@ public class ServiceHistories {
         this.executionTime = executionTime;
     }
 
-    public Timestamp getCocreated_atde() {
-        return cocreated_atde;
+    public LocalDate getCreatedat() {
+        return createdat;
     }
 
-    public void setCocreated_atde(Timestamp cocreated_atde) {
-        this.cocreated_atde = cocreated_atde;
+    public void setCreatedat(LocalDate createdat) {
+        this.createdat = createdat;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
     }
 
     @Override
     public String toString() {
         return "ServiceHistories{" +
                 "id=" + id +
-                ", service_id=" + service_id +
                 ", executionTime='" + executionTime + '\'' +
-                ", cocreated_atde=" + cocreated_atde +
+                ", createdat=" + createdat +
+                ", service=" + service +
                 '}';
     }
 }

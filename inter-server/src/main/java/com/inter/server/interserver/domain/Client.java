@@ -3,6 +3,7 @@ package com.inter.server.interserver.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,29 +13,26 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "clients-1")
+//    @NotBlank(message = "clients-1")
     private String username;
 
-    @NotNull(message = "clients-2")
+//    @NotNull(message = "clients-2")
     private String cpf;
 
-    @NotNull(message = "clients-3")
+//    @NotNull(message = "clients-3")
     private String password;
 
-    @NotNull(message = "clients-3")
-    private byte enabled;
+//    @NotNull(message = "clients-3")
+    private boolean enabled;
 
-//    @OneToMany(mappedBy = "client")
-////    private List<Script> scripts;
+    @OneToMany(mappedBy = "client")
+    private List<Service> services;
 
-    public Client() {
-    }
-
-    public Client(String username, String cpf, String password, byte enabled) {
+    public Client(String username, String cpf, String password) {
         this.username = username;
         this.cpf = cpf;
         this.password = password;
-        this.enabled = enabled;
+        this.enabled = true;
     }
 
     public Long getId() {
@@ -69,12 +67,24 @@ public class Client {
         this.password = password;
     }
 
-    public byte getEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(byte enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 
     @Override

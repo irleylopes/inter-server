@@ -1,11 +1,8 @@
 package com.inter.server.interserver.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Service {
@@ -14,8 +11,8 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "clients-1")
-    private Integer user_id;
+    @ManyToOne
+    private Client client;
 
     @NotNull(message = "clients-2")
     private String path;
@@ -24,13 +21,16 @@ public class Service {
     private String code;
 
     @NotNull(message = "clients-3")
-    private byte enabled;
+    private boolean enabled;
+
+    @OneToMany(mappedBy = "service")
+    private List<ServiceHistories> serviceHistories;
 
     public Service() {
     }
 
-    public Service(Integer user_id, String path, String code, byte enabled) {
-        this.user_id = user_id;
+    public Service(Client client, String path, String code, boolean enabled) {
+        this.client = client;
         this.path = path;
         this.code = code;
         this.enabled = enabled;
@@ -44,12 +44,20 @@ public class Service {
         this.id = id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Client getClient() {
+        return client;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getPath() {
@@ -68,19 +76,11 @@ public class Service {
         this.code = code;
     }
 
-    public byte getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(byte enabled) {
-        this.enabled = enabled;
-    }
-
     @Override
     public String toString() {
         return "Service{" +
                 "id=" + id +
-                ", user_id=" + user_id +
+                ", client=" + client +
                 ", path='" + path + '\'' +
                 ", code='" + code + '\'' +
                 ", enabled=" + enabled +

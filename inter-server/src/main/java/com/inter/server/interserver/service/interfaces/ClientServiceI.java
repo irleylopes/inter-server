@@ -17,4 +17,12 @@ public interface ClientServiceI {
     ClientResponse update(ClientRequest client);
 
     void delete(ClientRequest client);
+
+    void clientSaved(Client clientSave);
+
+    void clientExist(Client client);
+
+    void clientNotExist(Client client);
+
+    Client buildClient(ClientRequest clientRequest);
 }

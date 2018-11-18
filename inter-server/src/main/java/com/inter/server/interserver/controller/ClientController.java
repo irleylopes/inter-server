@@ -1,31 +1,54 @@
 package com.inter.server.interserver.controller;
 
 import com.inter.server.interserver.domain.Client;
-import com.inter.server.interserver.domain.request.ClientRequest;
 import com.inter.server.interserver.domain.response.ClientResponse;
-//import com.inter.server.interserver.service.implement.ClientService;
+import com.inter.server.interserver.service.implement.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value="client")
 public class ClientController {
 
-//    @Autowired
-//    private ClientService clientService;
+    @Autowired
+    private ClientService clientService;
 
     @GetMapping(value="/")
     public ModelAndView login() {
 
         ModelAndView mv = new ModelAndView("/login");
         return mv;
+    }
+
+    @GetMapping(value="/home")
+    public ModelAndView home(Client client) {
+
+        ModelAndView mv = new ModelAndView("/home");
+        return mv;
+    }
+
+    @GetMapping(value="/add")
+    public ModelAndView add(Client client) {
+
+        ModelAndView mv = new ModelAndView("/client");
+        mv.addObject("client", client);
+        return mv;
+    }
+
+    @PostMapping(value="/save")
+    public ModelAndView save(@Valid @RequestBody Client client, BindingResult result) {
+
+        if(result.hasErrors()) {
+            return add(client);
+        }
+        //,
+        // ClientResponse clientResponse = clientService.create(client);
+
+        return home(client);
     }
 
 //    @PostMapping()

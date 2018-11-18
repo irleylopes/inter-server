@@ -6,62 +6,67 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ClientRequest {
+public class ClientRequest implements Serializable {
 
-    @Pattern(regexp = "^.{3,255}$", message = "O campo deve conter no mínimo 3 caracteres")
-    @NotBlank(message = "O campo deve ser informado")
-    private String name;
+    private static final long serialVersionUID = 1L;
 
-    @CPF(message = "O CPF informado está inválido")
+//    @Pattern(regexp = "^.{3,255}$", message = "O campo deve conter no mínimo 3 caracteres")
+//    @NotBlank(message = "O campo deve ser informado")
+    private String username;
+//
+//    @CPF(message = "O CPF informado está inválido")
     private String cpf;
 
-    @NotBlank(message = "O campo deve ser informado")
-    private String email;
-
-    @NotBlank(message = "O campo deve ser informado")
+//    @NotBlank(message = "O campo deve ser informado")
     private String password;
 
-    @JsonCreator(mode = JsonCreator.Mode.DEFAULT)
-    public ClientRequest(
-            @JsonProperty("name") String name,
-            @JsonProperty("cpf") String cpf,
-            @JsonProperty("email") String email,
-            @JsonProperty("password") String password
-    ) {
-        this.name = name;
+//    @JsonCreator(mode = JsonCreator.Mode.DEFAULT)
+//    public ClientRequest(
+//            @JsonProperty("username") String username,
+//            @JsonProperty("cpf") String cpf,
+//            @JsonProperty("password") String password
+//    ) {
+//        this.username = username;
+//        this.cpf = cpf;
+//        this.password = password;
+//    }
+
+
+    public ClientRequest(String username, String cpf, String password) {
+        this.username = username;
         this.cpf = cpf;
-        this.email = email;
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public ClientRequest() {
+
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getCpf() {
-        return cpf;
+        return this.cpf;
     }
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -73,23 +78,21 @@ public class ClientRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ClientRequest that = (ClientRequest) o;
-        return Objects.equals(name, that.name) &&
+        return Objects.equals(username, that.username) &&
                 Objects.equals(cpf, that.cpf) &&
-                Objects.equals(email, that.email) &&
                 Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, cpf, email, password);
+        return Objects.hash(username, cpf, password);
     }
 
     @Override
     public String toString() {
         return "ClientRequest{" +
-                "name='" + name + '\'' +
+                "username='" + username + '\'' +
                 ", cpf='" + cpf + '\'' +
-                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

@@ -13,3 +13,4 @@ com\inter\server\interserver\InterServerApplication.class
 com\inter\server\interserver\domain\Service.class
 com\inter\server\interserver\domain\request\ClientRequest.class
 com\inter\server\interserver\interceptorException\MessageBuilder.class
+com\inter\server\interserver\service\implement\ClientService.class

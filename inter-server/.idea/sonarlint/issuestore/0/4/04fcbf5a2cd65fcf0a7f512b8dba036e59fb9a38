@@ -1,3 +1,6 @@
 
-Tsquid:S3655)"=Call "clientOptional.isPresent()" before accessing the value.(∏í≠Ò
-Bsquid:S1168 "+Return an empty collection instead of null.(•πÔç
+isquid:CommentedOutCodeLine="<This block of commented-out lines of code should be removed.(Á‡õŒ8†õîöÚ,
+üsquid:S1186."ÄAdd a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Èï∏Ω8¨„îöÚ,
+nsquid:CommentedOutCodeLineG"<This block of commented-out lines of code should be removed.(éÅçñ˙ˇˇˇˇ8†õîöÚ,
+Isquid:S1168 "+Return an empty collection instead of null.(•πÔç8Ü∞ÜöÚ,
+nsquid:CommentedOutCodeLine3"<This block of commented-out lines of code should be removed.(•ï’á¯ˇˇˇˇ8†õîöÚ,

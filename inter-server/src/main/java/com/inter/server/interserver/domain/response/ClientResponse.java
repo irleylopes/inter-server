@@ -4,11 +4,11 @@ public class ClientResponse {
 
     private Long id;
 
-    private String name;
+    private String username;
 
     public ClientResponse(Long id, String name) {
         this.id = id;
-        this.name = name;
+        this.username = name;
     }
 
     public ClientResponse() {
@@ -22,19 +22,19 @@ public class ClientResponse {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
     public String toString() {
         return "ClientResponse{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
                 '}';
     }
 }
