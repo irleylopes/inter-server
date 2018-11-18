@@ -10,13 +10,11 @@ public interface ClientServiceI {
 
     ClientResponse create(ClientRequest client);
 
-    List<Client> findAll();
-
     ClientResponse findById(Long id);
 
-    ClientResponse update(ClientRequest client);
+    ClientResponse update(ClientRequest client, Long id);
 
-    void delete(ClientRequest client);
+    void cancelUser(ClientRequest client);
 
     void clientSaved(Client clientSave);
 

@@ -13,16 +13,16 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @NotBlank(message = "clients-1")
+    @NotBlank(message = "clients-1")
     private String username;
 
-//    @NotNull(message = "clients-2")
+    @NotNull(message = "clients-2")
     private String cpf;
 
-//    @NotNull(message = "clients-3")
+    @NotNull(message = "clients-3")
     private String password;
 
-//    @NotNull(message = "clients-3")
+    @NotNull(message = "clients-3")
     private boolean enabled;
 
     @OneToMany(mappedBy = "client")
@@ -34,6 +34,8 @@ public class Client {
         this.password = password;
         this.enabled = true;
     }
+
+    public Client(){}
 
     public Long getId() {
         return id;

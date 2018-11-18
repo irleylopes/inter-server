@@ -6,9 +6,9 @@ public class ClientResponse {
 
     private String username;
 
-    public ClientResponse(Long id, String name) {
+    public ClientResponse(Long id, String username) {
         this.id = id;
-        this.username = name;
+        this.username = username;
     }
 
     public ClientResponse() {

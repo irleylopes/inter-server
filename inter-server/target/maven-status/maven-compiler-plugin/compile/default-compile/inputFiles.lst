@@ -1,9 +1,7 @@
 C:\Users\irley\workspace\inter-server\inter-server\src\main\java\com\inter\server\interserver\InterServerApplication.java
-C:\Users\irley\workspace\inter-server\inter-server\src\main\java\com\inter\server\interserver\config\WebConfigSecurity.java
 C:\Users\irley\workspace\inter-server\inter-server\src\main\java\com\inter\server\interserver\domain\response\ClientResponse.java
 C:\Users\irley\workspace\inter-server\inter-server\src\main\java\com\inter\server\interserver\exception\BusinessRuleException.java
 C:\Users\irley\workspace\inter-server\inter-server\src\main\java\com\inter\server\interserver\repository\ClientRepository.java
-C:\Users\irley\workspace\inter-server\inter-server\src\main\java\com\inter\server\interserver\config\MvcConfig.java
 C:\Users\irley\workspace\inter-server\inter-server\src\main\java\com\inter\server\interserver\domain\Client.java
 C:\Users\irley\workspace\inter-server\inter-server\src\main\java\com\inter\server\interserver\service\implement\ClientService.java
 C:\Users\irley\workspace\inter-server\inter-server\src\main\java\com\inter\server\interserver\domain\ServiceHistories.java

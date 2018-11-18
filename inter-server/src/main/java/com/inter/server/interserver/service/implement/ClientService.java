@@ -28,54 +28,39 @@ public class ClientService implements ClientServiceI {
     }
 
     @Override
-    public List<Client> findAll() {
-        return null;
-    }
-
-    @Override
     public ClientResponse findById(Long id) {
-        return null;
+        Optional<Client> clientOptional = clientRepository.findById(id);
+        if(!clientOptional.isPresent()) {
+            throw new NonExistentException("CLIENT","Client not exists");
+        }
+        Client client = clientOptional.get();
+        return new ClientResponse(client.getId(), client.getUsername());
     }
 
     @Override
-    public ClientResponse update(ClientRequest client) {
-        return null;
+    public ClientResponse update(ClientRequest clientRequest, Long id) {
+        // FIELD'S UPDATE -> NAME
+        Optional<Client> clientOptional = clientRepository.findById(id);
+        if(!clientOptional.isPresent()) {
+            throw new NonExistentException("CLIENT","Client not exists");
+        }
+        Client client = clientOptional.get();
+        client.setUsername(clientRequest.getUsername());
+        Client clientSave = clientRepository.save(client);
+        clientSaved(clientSave);
+        return new ClientResponse(clientSave.getId(), clientSave.getUsername());
     }
 
     @Override
-    public void delete(ClientRequest client) {
+    public void cancelUser(ClientRequest clientRequest) {
 
+        Client client = clientRepository.findByCpf(clientRequest.getCpf());
+        clientNotExist(client);
+        client.setEnabled(false);
+        Client clientSave = clientRepository.save(client);
+        clientSaved(clientSave);
     }
 
-//    @Override
-//    public ClientResponse findById(Long id) {
-//        Optional<Client> clientOptional = clientRepository.findById(id);
-////        if(clientOptional.isEmpty()){
-////            throw new NonExistentException("CLIENT NOT EXISTS","Client Not Exists in Database");
-////        }
-//        Client client = clientOptional.get();
-//        return new ClientResponse(client.getId(), client.getUsername());
-//    }
-//
-//    @Override
-//    public ClientResponse update(ClientRequest clientRequest) {
-//        Client client = clientRepository.findByCpf(clientRequest.getCpf());
-//        clientNotExist(client);
-//        Client clientUpdate = buildClient(clientRequest);
-//        clientUpdate.setId(client.getId());
-//        clientUpdate = clientRepository.save(clientUpdate);
-//        return new ClientResponse(clientUpdate.getId(), clientUpdate.getUsername());
-//    }
-//
-//    @Override
-//    public void delete(ClientRequest clientRequest) {
-//        Client client = clientRepository.findByCpf(clientRequest.getCpf());
-//        clientNotExist(client);
-//        Client clientDelete = buildClient(clientRequest);
-//        clientDelete.setId(client.getId());
-//        clientRepository.save(clientDelete);
-//    }
-//
     @Override
     public void clientSaved(Client clientSave) {
 

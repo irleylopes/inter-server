@@ -13,36 +13,25 @@ public class ClientRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-//    @Pattern(regexp = "^.{3,255}$", message = "O campo deve conter no mínimo 3 caracteres")
-//    @NotBlank(message = "O campo deve ser informado")
+    @Pattern(regexp = "^.{3,255}$", message = "O campo deve conter no mínimo 3 caracteres")
+    @NotBlank(message = "O campo deve ser informado")
     private String username;
-//
-//    @CPF(message = "O CPF informado está inválido")
+
+    @CPF(message = "O CPF informado está inválido")
     private String cpf;
 
-//    @NotBlank(message = "O campo deve ser informado")
+    @NotBlank(message = "O campo deve ser informado")
     private String password;
 
-//    @JsonCreator(mode = JsonCreator.Mode.DEFAULT)
-//    public ClientRequest(
-//            @JsonProperty("username") String username,
-//            @JsonProperty("cpf") String cpf,
-//            @JsonProperty("password") String password
-//    ) {
-//        this.username = username;
-//        this.cpf = cpf;
-//        this.password = password;
-//    }
-
-
-    public ClientRequest(String username, String cpf, String password) {
+    @JsonCreator(mode = JsonCreator.Mode.DEFAULT)
+    public ClientRequest(
+            @JsonProperty("username") String username,
+            @JsonProperty("cpf") String cpf,
+            @JsonProperty("password") String password
+    ) {
         this.username = username;
         this.cpf = cpf;
         this.password = password;
-    }
-
-    public ClientRequest() {
-
     }
 
     public static long getSerialVersionUID() {
